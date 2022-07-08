@@ -20,8 +20,14 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const getAuth = () => {
+      let token = JSON.parse(localStorage.getItem("token")) || null;
+      token = 'access_token=' + token;
       axios
-        .get("https://dtamtasocialmedia.herokuapp.com/api/authenticated")
+        .get("https://dtamtasocialmedia.herokuapp.com/api/authenticated",{
+          headers: {
+            Cookie:[token]
+          }
+        })
         .then((res) => {
           if (res.status !== 401) {
             const { user } = res.data;
