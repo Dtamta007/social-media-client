@@ -4,7 +4,7 @@ import {MoreVert} from "@material-ui/icons";
 import {useState} from "react";
 import {format} from "timeago.js";
 import {Link} from 'react-router-dom';
-import { AuthContext } from "../../../public/context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 
 export default function Post({post}) {

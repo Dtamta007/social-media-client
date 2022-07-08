@@ -3,7 +3,7 @@ import Online from "../online/Online";
 import {Users} from "../../dummyData";
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../../public/context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 import {Add, Remove} from "@material-ui/icons";
 import axios from 'axios';
 
