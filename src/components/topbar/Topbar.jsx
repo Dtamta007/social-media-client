@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import "./topbar.css";
 import {Search, Chat, Notifications, Person, ExitToApp} from "@material-ui/icons";
 import {Link} from "react-router-dom";
-import {AuthContext} from "../../context/AuthContext";
+import {AuthContext} from "../../../public/context/AuthContext";
 import axios from 'axios';
 
 export default function Topbar() {
