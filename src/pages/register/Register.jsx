@@ -1,7 +1,7 @@
-import {axiosInstance} from "../../config";
 import { useRef } from "react";
 import "./register.css";
 import {Link, useNavigate} from 'react-router-dom'
+import axios from "axios";
 
 export default function Register() {
 
@@ -22,7 +22,7 @@ export default function Register() {
                 password : password.current.value
             };
             try{
-                await axiosInstance.post("/auth/register", user);
+                await axios.post("https://dtamtasocialmedia.herokuapp.com/api/auth/register", user);
                 navigate("/login");
             }catch(err){
                 console.log(err);

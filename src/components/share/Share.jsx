@@ -2,7 +2,7 @@ import "./share.css";
 import {PermMedia, Label, Room, EmojiEmotions, Cancel} from "@material-ui/icons";
 import { useContext, useRef, useState } from "react";
 import {AuthContext} from "../../context/AuthContext";
-import {axiosInstance} from '../../config';
+import axios from "axios";
 
 export default function Share() {
 
@@ -25,14 +25,14 @@ export default function Share() {
             data.append("file", file);
             newPost.img = fileName;
             try{
-                await axiosInstance.post("/upload", data);
+                await axios.post("https://dtamtasocialmedia.herokuapp.com/api/upload", data);
             }catch(err){
                 console.log(err);
             }
         }
 
         try{
-            await axiosInstance.post("/posts", newPost);
+            await axios.post("https://dtamtasocialmedia.herokuapp.com/api/posts", newPost);
             window.location.reload();
         }catch(err){
             console.log(err);

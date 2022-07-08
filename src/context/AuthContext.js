@@ -1,6 +1,6 @@
 import { createContext, useEffect, useReducer } from "react";
 import AuthReducer from "./AuthReducer";
-import { axiosInstance } from "../config";
+import axios from "axios";
 
 let INITIAL_STATE = {
   user: JSON.parse(localStorage.getItem("auth")) || null,
@@ -20,8 +20,8 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const getAuth = () => {
-      axiosInstance
-        .get("/authenticated")
+      axios
+        .get("https://dtamtasocialmedia.herokuapp.com/api/authenticated")
         .then((res) => {
           if (res.status !== 401) {
             const { user } = res.data;

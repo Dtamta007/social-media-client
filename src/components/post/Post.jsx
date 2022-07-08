@@ -2,10 +2,10 @@ import {useContext, useEffect} from "react"
 import "./post.css"
 import {MoreVert} from "@material-ui/icons";
 import {useState} from "react";
-import {axiosInstance} from "../../config";
 import {format} from "timeago.js";
 import {Link} from 'react-router-dom';
 import { AuthContext } from "../../context/AuthContext";
+import axios from "axios";
 
 export default function Post({post}) {
 
@@ -17,7 +17,7 @@ export default function Post({post}) {
     
     const likeHandler = () =>{
         try{
-            axiosInstance.post("/posts/"+post._id+"/like", {userId: currentUser._id})
+            axios.post("https://dtamtasocialmedia.herokuapp.com/api/posts/"+post._id+"/like", {userId: currentUser._id})
         }catch(err){
             console.log(err)
         }
@@ -34,7 +34,7 @@ export default function Post({post}) {
 
     useEffect(()=>{
         const fetchUser = async () =>{
-           const res = await axiosInstance.get(`/users?userId=${post.userId}`);
+           const res = await axios.get(`https://dtamtasocialmedia.herokuapp.com/api/users?userId=${post.userId}`);
             setUser(res.data);
         }
         fetchUser();

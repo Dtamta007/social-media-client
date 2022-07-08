@@ -2,8 +2,8 @@ import {useState, useEffect, useContext} from "react";
 import "./feed.css"
 import Share from"../share/Share";
 import Post from"../post/Post";
-import {axiosInstance} from '../../config';
 import { AuthContext } from "../../context/AuthContext";
+import axios from "axios";
 
 
 export default function Feed({username}) {
@@ -14,8 +14,8 @@ export default function Feed({username}) {
     useEffect(()=>{
         const fetchPosts = async () =>{
            const res = username 
-            ? await axiosInstance.get("/posts/profile/"+username) 
-            : await axiosInstance.get("posts/timeline/"+ user._id);
+            ? await axios.get("https://dtamtasocialmedia.herokuapp.com/api/posts/profile/"+username) 
+            : await axios.get("https://dtamtasocialmedia.herokuapp.com/api/posts/timeline/"+ user._id);
             // console.log("FEED DATA: ", res.data);
             setPosts(res.data.sort((p1,p2)=>{
                 return new Date(p2.createdAt) - new Date(p1.createdAt);

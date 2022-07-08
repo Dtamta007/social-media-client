@@ -2,10 +2,10 @@ import './rightbar.css';
 import Online from "../online/Online";
 import {Users} from "../../dummyData";
 import { useContext, useEffect, useState } from 'react';
-import {axiosInstance} from '../../config';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import {Add, Remove} from "@material-ui/icons";
+import axios from 'axios';
 
 export default function Rightbar({user}) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -21,7 +21,7 @@ export default function Rightbar({user}) {
     useEffect(()=>{
         const getFriends = async () =>{
             try{
-                const friendList = await axiosInstance.get("/users/friends/" + user._id);
+                const friendList = await axios.get("https://dtamtasocialmedia.herokuapp.com/api/users/friends/" + user._id);
                 setFriends(friendList.data);
             }catch(err){    
                 console.log(err);
@@ -33,12 +33,12 @@ export default function Rightbar({user}) {
     const handleClick=async ()=>{
         try{
             if(followed){
-                await axiosInstance.post(`/users/${user._id}/unfollow`, {
+                await axios.post(`https://dtamtasocialmedia.herokuapp.com/api/users/${user._id}/unfollow`, {
                   userId: currentUser._id,
                 });
                 dispatch({ type: "UNFOLLOW", payload: user._id });
             }else{
-                await axiosInstance.post(`/users/${user._id}/follow`, {
+                await axios.post(`https://dtamtasocialmedia.herokuapp.com/api/users/${user._id}/follow`, {
                   userId: currentUser._id,
                 });
                 dispatch({ type: "FOLLOW", payload: user._id });
